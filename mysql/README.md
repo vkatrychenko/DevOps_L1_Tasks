@@ -34,4 +34,28 @@ create table devops_l1_tasks (
 
 **Fill the tables**
 
+`INSERT INTO devops_l1_members (member_name, member_location) VALUES ('Vlad', 'Dnipro');`
+`INSERT INTO devops_l1_member_status (member_id,member_status) VALUES ('1', 'done');`
+```
+MariaDB [devops_l1]> SELECT * FROM devops_l1_members;
++-----------+-------------+-----------------+-----------------+
+| member_id | member_name | member_location | submission_date |
++-----------+-------------+-----------------+-----------------+
+|         1 | Vlad        | Dnipro          | NULL            |
++-----------+-------------+-----------------+-----------------+
+1 row in set (0.001 sec)
 
+MariaDB [devops_l1]> SELECT * FROM devops_l1_member_status;
++-----------+---------------+
+| member_id | member_status |
++-----------+---------------+
+|         1 | done          |
++-----------+---------------+
+1 row in set (0.001 sec)
+
+MariaDB [devops_l1]> DELETE FROM devops_l1_members where member_id=1;
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [devops_l1]> SELECT * FROM devops_l1_member_status;
+Empty set (0.001 sec)
+```
