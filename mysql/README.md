@@ -169,3 +169,113 @@ MariaDB [devops_l1]> select * from devops_l1_member_status;
 |         4 | done          |
 +-----------+---------------+
 ```
+
+**Create RDS database, restore backup and perform some changes**
+
+![tables](images/Screenshot%202022-10-23%20at%2021.09.01.png)
+
+```
+ mysql -h devops.cp0dfgea95dz.us-east-1.rds.amazonaws.com -P 3306 -u vkatr -p
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| devops_l1          |
+| information_schema |
+| innodb             |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.100 sec)
+
+MariaDB [(none)]> use devops_l1;
+Database changed
+MariaDB [devops_l1]> show tables;
+Empty set (0.099 sec)
+```
+Restore the database
+
+`mysql -h devops.cp0dfgea95dz.us-east-1.rds.amazonaws.com -P 3306 -u vkatr -p devops_l1 < mydbscheme_dump.sql`
+
+Check database after restoration
+
+```
+MariaDB [(none)]> use devops_l1;
+
+Database changed
+MariaDB [devops_l1]> show tables;
++-------------------------+
+| Tables_in_devops_l1     |
++-------------------------+
+| devops_l1_member_status |
+| devops_l1_members       |
+| devops_l1_tasks         |
++-------------------------+
+3 rows in set (0.099 sec)
+
+MariaDB [devops_l1]> SELECT * FROM devops_l1_members;
++-----------+-------------+-----------------+-----------------+
+| member_id | member_name | member_location | submission_date |
++-----------+-------------+-----------------+-----------------+
+|         2 | Vlad        | Dnipro          | 2022-10-22      |
+|         3 | Gena        | Ashdod          | NULL            |
+|         4 | Anton       | Kiev            | NULL            |
++-----------+-------------+-----------------+-----------------+
+3 rows in set (0.106 sec)
+
+MariaDB [devops_l1]> UPDATE devops_l1_members SET member_location = 'Lviv' WHERE member_id = 2;
+Query OK, 1 row affected (0.101 sec)
+
+MariaDB [devops_l1]> SELECT * FROM devops_l1_members;
++-----------+-------------+-----------------+-----------------+
+| member_id | member_name | member_location | submission_date |
++-----------+-------------+-----------------+-----------------+
+|         2 | Vlad        | Lviv            | 2022-10-22      |
+|         3 | Gena        | Ashdod          | NULL            |
+|         4 | Anton       | Kiev            | NULL            |
++-----------+-------------+-----------------+-----------------+
+3 rows in set (0.103 sec)
+```
+**MongoDB database**
+
+```
+test> use devops_l1
+switched to db devops_l1
+devops_l1> db
+devops_l1
+devops_l1> db.createCollection("member_id");
+{ ok: 1 }
+devops_l1> db.createCollection("member_name");
+{ ok: 1 }
+devops_l1> db.createCollection("member_location");
+{ ok: 1 }
+devops_l1> show collections;
+member_id
+member_location
+member_name
+devops_l1> db.member_name.drop()
+true
+devops_l1> db.member_location.drop()
+true
+devops_l1> show collections;
+member_id
+devops_l1> db.member_id.drop()
+true
+devops_l1> db.createCollection("member");
+{ ok: 1 }
+devops_l1> db.member.insert({name: 'Vlad',location: 'Dnipro'});
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("63558980b6968694dd995f47") }
+}
+devops_l1> db.member.find();
+[
+  {
+    _id: ObjectId("63558980b6968694dd995f47"),
+    name: 'Vlad',
+    location: 'Dnipro'
+  }
+]
+```
