@@ -34,6 +34,7 @@ jobs:
           
       - name: Further installation
         run: |
+          source ~/.bash_profile
           command -v nvm
           nvm install v14.19.3
           nvm use v14.19.3
