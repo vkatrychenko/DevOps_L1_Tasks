@@ -28,5 +28,8 @@ jobs:
         run: |
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
           source ~/.bashrc
+          
+      - name: Further installation
+        run: |
           nvm install v14.19.3
           nvm use v14.19.3
