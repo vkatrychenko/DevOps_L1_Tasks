@@ -33,12 +33,18 @@ jobs:
       
       - name: install yarn
         run: npm install -g yarn
+      
+      - name: create file
+        run: touch index2.html
+        
+      - name: create html page
+        run: "<p>Hello page</>" > index2.html
         
       - name: HTML Preview
         id: html_preview
         uses: pavi2410/html-preview-action@v2
         with:
-         html_file: 'index.html'
+         html_file: 'index2.html'
          
       - name: URL
         run: echo ${{ steps.html_preview.outputs.url }}
