@@ -1,4 +1,5 @@
 ![Same Workflow](https://github.com/vkatrychenko/DevOps_L1_Tasks/actions/workflows/v2.yml/badge.svg)
+![Same Workflow](https://github.com/vkatrychenko/DevOps_L1_Tasks/actions/workflows/main.yml/badge.svg)
 
 # EPAM DevOps course
 
