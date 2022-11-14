@@ -39,3 +39,6 @@ jobs:
           node -v
           npm -v
           yarn -v
+          which node
+          echo $GITHUB_WORKSPACE
+          echo $HOME
