@@ -26,7 +26,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Install node verion
         run: |
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-        source ~/.bashrc
-        nvm install v14.19.3
-        nvm use v14.19.3
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+          source ~/.bashrc
+          nvm install v14.19.3
+          nvm use v14.19.3
