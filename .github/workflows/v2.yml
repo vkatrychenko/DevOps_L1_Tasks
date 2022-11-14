@@ -34,11 +34,11 @@ jobs:
       - name: install yarn
         run: npm install -g yarn
         
-      - name: check version
-        run: |
-          node -v
-          npm -v
-          yarn -v
-          which node
-          echo $GITHUB_WORKSPACE
-          echo $HOME
+      - name: HTML Preview
+        id: html_preview
+        uses: pavi2410/html-preview-action@v2
+        with:
+         html_file: 'index.html'
+         
+      - name: URL
+        run: echo ${{ steps.html_preview.outputs.url }}
