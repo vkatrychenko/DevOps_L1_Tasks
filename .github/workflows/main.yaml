@@ -35,8 +35,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: print env
-        run: printenv
+      - name: script
+        run: |
+          chmod 700 hello.sh
+          ./hello.sh
 
       - run: echo hello > world.html
 
