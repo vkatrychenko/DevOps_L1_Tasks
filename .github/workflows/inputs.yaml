@@ -3,19 +3,34 @@ name: CI
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        type: environment
-        description: Select the environment
-      boolean:
+      XRAY:
         type: boolean
-        description: True or False
-      choice:
+        description: Would you like to update results on XRAY?
+      XRAY_EXECUTION_KEY:
+        description: Specify XRAY_EXECUTION_KEY. By default "HSA-2339"
+        default: 'HSA-2339'
+      ENVIRONMENT: 
         type: choice
-        description: Make a choice
+        description: On which environment should I run checks?
         options:
         - foo
         - bar
         - baz
+      GROUPS:
+        description: 'Choose test groups to run from [admin, employee, retro]. Single group example: group1. Multiple groups separated with comma: group1,group2. By default all groups are selected.'
+        default: ''
+      EXCLUDE_GROUPS:
+        description: 'Choose test groups to exclude from run. Single group example: group1. Multiple groups separated with comma: group1,group2.'
+        default: 'retro,templates'
+      BRANCH:
+        description: Choose repo branch to run tests from
+        default: ''
+      WHERE_TO_RUN:
+        description: Choose where to run?
+        type: choice
+        options:
+        - web
+        - mobile
 jobs:
   build:
     runs-on: ubuntu-latest
