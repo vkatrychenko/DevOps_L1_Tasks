@@ -32,12 +32,6 @@ jobs:
         run: |
           chmod 700 hello.sh
           ./hello.sh
-          
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin' 
-          java-version: '17'
-          cache: 'maven'
       
       - name: Install soft
         run: |
