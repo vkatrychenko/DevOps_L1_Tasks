@@ -36,6 +36,6 @@ jobs:
       - name: Install soft
         run: |
           curl -o allure-2.17.3.tgz -OLs https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz
-          sudo tar -zxf allure-2.13.8.tgz -C /opt/
-          sudo ln -s /opt/allure-2.13.8/bin/allure /usr/bin/allure
+          sudo tar -zxf allure-2.17.3.tgz -C /opt/
+          sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure
           allure --version
