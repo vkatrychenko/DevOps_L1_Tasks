@@ -1,0 +1,22 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - master
+
+env:
+  GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
+  GITHUB_SOURCE: ${{github.event.pull_request.base.ref}}
+  GITHUB_TARGET: ${{github.event.pull_request.head.ref}}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Test
+        run: |
+          echo "$GITHUB_PR_NUMBER"
+          echo "$GITHUB_SOURCE"
+          echo "$GITHUB_TARGET"
