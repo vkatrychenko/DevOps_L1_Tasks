@@ -1,4 +1,4 @@
-name: Test
+name: pull request
 
 on: pull_request
 
@@ -11,6 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
 
       - name: SonarQube scan
         uses: ./.github/actions/test

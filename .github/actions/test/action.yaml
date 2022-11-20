@@ -16,6 +16,7 @@ runs:
   steps:
 
     - name: Test
+      shell: bash
       run: |
         echo ${{ inputs.PR_ID }}
         echo ${{ inputs.BASE_BRANCH }}
