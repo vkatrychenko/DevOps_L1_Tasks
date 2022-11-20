@@ -1,15 +1,11 @@
-name: pull request
+name: Pull request check
 
 on: 
   pull_request:
     inputs:
       WHERE_TO_RUN:
-        required: true
+        default: web
         description: Choose where to run?
-        type: choice
-        options:
-        - web
-        - mobile
 
 env:
   GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
