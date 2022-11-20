@@ -43,4 +43,4 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: greet
-        run: printenv | grep WERE_TO_RUN
+        run: printenv | grep WHERE_TO_RUN
