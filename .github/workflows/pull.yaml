@@ -7,8 +7,8 @@ on:
 
 env:
   GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
-  GITHUB_SOURCE: ${{github.event.pull_request.base.ref}}
-  GITHUB_TARGET: ${{github.event.pull_request.head.ref}}
+  GITHUB_BASE: ${{github.event.pull_request.base.ref}}
+  GITHUB_BRANCH: ${{github.event.pull_request.head.ref}}
 
 jobs:
   build:
