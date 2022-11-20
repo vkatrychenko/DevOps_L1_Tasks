@@ -3,28 +3,19 @@ name: Manual test
 on:
   workflow_dispatch:
     inputs:
-      XRAY:
-        type: boolean
-        description: Would you like to update results on XRAY?
-      XRAY_EXECUTION_KEY:
-        description: Specify XRAY_EXECUTION_KEY. By default "HSA-2339"
-        default: 'HSA-2339'
       ENVIRONMENT: 
         type: choice
         description: On which environment should I run checks?
         options:
-        - foo
-        - bar
-        - baz
+        - dev
+        - demo
+        - qa
       GROUPS:
         description: 'Choose test groups to run from [admin, employee, retro]. Single group example: group1. Multiple groups separated with comma: group1,group2. By default all groups are selected.'
         default: ''
       EXCLUDE_GROUPS:
         description: 'Choose test groups to exclude from run. Single group example: group1. Multiple groups separated with comma: group1,group2.'
         default: 'retro,templates'
-      BRANCH:
-        description: Choose repo branch to run tests from
-        default: ''
       WHERE_TO_RUN:
         description: Choose where to run?
         type: choice
@@ -34,6 +25,8 @@ on:
         
 env:
   WHERE_TO_RUN: ${{ inputs.WHERE_TO_RUN }}
+  AWS_SECRET_DEV: "secret"
+  AWS_SECRET_QA: "now way"
 
 jobs:
   build:
@@ -43,4 +36,4 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: greet
-        run: printenv | grep WHERE_TO_RUN
+        run: echo ${{ env.AWS_SECRET_${{ inputs.ENVIRONMENT }} }}
