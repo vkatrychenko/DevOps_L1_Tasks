@@ -7,9 +7,9 @@ on:
         type: choice
         description: On which environment should I run checks?
         options:
-        - dev
-        - demo
-        - qa
+        - DEV
+        - DEMO
+        - QA
       GROUPS:
         description: 'Choose test groups to run from [admin, employee, retro]. Single group example: group1. Multiple groups separated with comma: group1,group2. By default all groups are selected.'
         default: ''
