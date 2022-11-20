@@ -1,11 +1,15 @@
 name: Pull request check
 
 on: 
-  pull_request:
+  workflow_dispatch:
     inputs:
-      WHERE_TO_RUN:
-        default: web
-        description: Choose where to run?
+      environment:
+        description: 'Environment to run the workflow against'
+        type: environment
+        required: true
+        
+  pull_request:
+    types: [opened, reopened]
 
 env:
   GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
@@ -17,6 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
+      - name: input
+        run: echo "${{ inputs.environment }}"
 
       - uses: actions/setup-java@v3
         with:

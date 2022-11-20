@@ -43,3 +43,4 @@ jobs:
           ENV: ${{ inputs.ENVIRONMENT}}
           AWS_TESTDATA_SECRET_NAME: $AWS_SECRET_${{ inputs.ENVIRONMENT }}
           WHERE_TO_RUN: ${{ inputs.WERE_TO_RUN }}
+
