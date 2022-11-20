@@ -1,0 +1,24 @@
+name: SonarQube scan
+description: SonarQube scan
+inputs:
+  PR_ID:
+    description: Github pull request id
+  BASE_BRANCH:
+    description: Github base branch name
+  CURRENT_BRANCH:
+    description: Github current branch
+  PLACE:
+    description: Sonar report place
+    required: true
+
+runs: 
+  using: "composite"
+  steps:
+
+    - name: Test
+      run: |
+        echo ${{ inputs.PR_ID }}
+        echo ${{ inputs.BASE_BRANCH }}
+        echo ${{ inputs.CURRENT_BRANCH }}
+        echo ${{ inputs.PLACE }}
+    

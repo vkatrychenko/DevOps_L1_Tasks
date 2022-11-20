@@ -4,16 +4,18 @@ on: pull_request
 
 env:
   GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
-  GITHUB_SOURCE: ${{github.event.pull_request.base.ref}}
-  GITHUB_TARGET: ${{github.event.pull_request.head.ref}}
+  GITHUB_BASE: ${{github.event.pull_request.base.ref}}
+  CURRENT_BRANCH: ${{github.event.pull_request.head.ref}}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Test
-        run: |
-          echo "$GITHUB_PR_NUMBER"
-          echo "$GITHUB_SOURCE"
-          echo "$GITHUB_TARGET"
+      - name: SonarQube scan
+        uses: ./.github/actions/test
+        with:
+          PR_ID: ${{ env.GITHUB_PR_NUMBER }}
+          BASE_BRANCH: ${{ env.GITHUB_BASE }}
+          CURRENT_BRANCH: ${{ env.CURRENT_BRANCH }}
+          PLACE: "pullRequest=${{ env.GITHUB_PR_NUMBER }}"
