@@ -30,17 +30,15 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: SonarQube scan
-        uses: ./.github/actions/test
+      
+      - uses: actions/setup-java@v3
         with:
-          CURRENT_BRANCH: ${GITHUB_REF#refs/heads/}
-          PLACE: "branch=${GITHUB_REF#refs/heads/}"
-          ENV: ${{ inputs.ENVIRONMENT}}
-          AWS_TESTDATA_SECRET_NAME: $AWS_SECRET_${{ inputs.ENVIRONMENT }}
-          WHERE_TO_RUN: ${{ inputs.WERE_TO_RUN }}
+          distribution: 'temurin' 
+          java-version: '17'
+      - name: test
+        run: mvn -v
 
