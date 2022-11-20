@@ -40,4 +40,4 @@ jobs:
         run: export AWS_SECRET_${{ inputs.ENVIRONMENT }}
         
       - name: result
-        run: ${{  steps.run_tests.outputs }}
+        run: ${{  steps.run_tests.outputs.stdout }}
