@@ -35,9 +35,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: greet
-        id: run_tests
-        run: echo $AWS_SECRET_${{ inputs.ENVIRONMENT }}
-        
-      - name: result
-        run: ${{  steps.run_tests.outputs.stdout }}
+      - name: SonarQube scan
+        uses: ./.github/actions/test
+        with:
+          CURRENT_BRANCH: ${GITHUB_REF#refs/heads/}
+          PLACE: "branch=${GITHUB_REF#refs/heads/}"
+          ENV: ${{ inputs.ENVIRONMENT}}
+          AWS_TESTDATA_SECRET_NAME: $AWS_SECRET_${{ inputs.ENVIRONMENT }}
+          WHERE_TO_RUN: ${{ inputs.WERE_TO_RUN }}
+

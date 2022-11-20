@@ -45,5 +45,3 @@ jobs:
           sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v4.24.4/yq_linux_amd64 && chmod a+x /usr/local/bin/yq
           sudo wget -cq https://get.helm.sh/helm-v3.8.2-linux-amd64.tar.gz -O - | tar -xz
           sudo mv linux-amd64/helm /usr/local/bin/helm && rm -r linux-amd64
-          allure --version
-          helm help
