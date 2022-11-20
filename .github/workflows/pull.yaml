@@ -4,6 +4,7 @@ on:
   pull_request:
     inputs:
       WHERE_TO_RUN:
+        required: true
         description: Choose where to run?
         type: choice
         options:
