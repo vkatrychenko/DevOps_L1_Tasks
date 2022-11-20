@@ -1,6 +1,14 @@
 name: pull request
 
-on: pull_request
+on: 
+  pull_request:
+    inputs:
+      WHERE_TO_RUN:
+        description: Choose where to run?
+        type: choice
+        options:
+        - web
+        - mobile
 
 env:
   GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
@@ -20,3 +28,6 @@ jobs:
           BASE_BRANCH: ${{ env.GITHUB_BASE }}
           CURRENT_BRANCH: ${{ env.CURRENT_BRANCH }}
           PLACE: "pullRequest=${{ env.GITHUB_PR_NUMBER }}"
+          ENV: dev
+          AWS_TESTDATA_SECRET_NAME: secret
+          WHERE_TO_RUN: ${{ inputs.WERE_TO_RUN }}
