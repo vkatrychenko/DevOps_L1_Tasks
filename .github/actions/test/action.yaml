@@ -43,8 +43,8 @@ runs:
       shell: bash
       run: |
         cat << EOF > .env
-        AWS_TESTDATA_${env^^}_SECRET_NAME=${{ inputs.AWS_TESTDATA_SECRET_NAME }}
-        env=$env
+        AWS_TESTDATA_${env}_SECRET_NAME=${{ inputs.AWS_TESTDATA_SECRET_NAME }}
+        env=${env,,}
         USE_LOCAL_BROWSER=false
         SELENOID_URL=http://system-moon.moon-hsc.svc.cluster.local:4444/wd/hub
         WHERE_TO_RUN=${{ inputs.WHERE_TO_RUN }}
