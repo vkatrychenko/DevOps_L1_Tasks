@@ -37,7 +37,7 @@ jobs:
 
       - name: greet
         id: run_tests
-        run: export AWS_SECRET_${{ inputs.ENVIRONMENT }}
+        run: echo $AWS_SECRET_${{ inputs.ENVIRONMENT }}
         
       - name: result
         run: ${{  steps.run_tests.outputs.stdout }}
