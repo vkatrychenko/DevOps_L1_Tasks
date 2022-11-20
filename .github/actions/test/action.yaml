@@ -10,15 +10,42 @@ inputs:
   PLACE:
     description: Sonar report place
     required: true
+  ENV:
+    description: Sonar report place
+    required: true
+  AWS_TESTDATA_SECRET_NAME:
+    description: Sonar report place
+    required: true
+  WHERE_TO_RUN:
+    description: Sonar report place
+    required: true
 
 runs: 
   using: "composite"
   steps:
 
     - name: Test
+      shell: bash
       run: |
         echo ${{ inputs.PR_ID }}
         echo ${{ inputs.BASE_BRANCH }}
         echo ${{ inputs.CURRENT_BRANCH }}
         echo ${{ inputs.PLACE }}
+
+    - name: add .env file for ${env} environment
+      env: 
+        env: ${{ inputs.ENV }}
+      shell: bash
+      run: |
+        cat << EOF > .env
+        AWS_TESTDATA_${env^^}_SECRET_NAME=${{ inputs.AWS_TESTDATA_SECRET_NAME }}
+        env=$env
+        USE_LOCAL_BROWSER=false
+        SELENOID_URL=http://system-moon.moon-hsc.svc.cluster.local:4444/wd/hub
+        WHERE_TO_RUN=${{ inputs.WHERE_TO_RUN }}
+        EOF
+
+    - name: check env file
+      shell: bash
+      run: cat .env
     
