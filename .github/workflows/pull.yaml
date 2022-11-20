@@ -6,10 +6,6 @@ on:
       WHERE_TO_RUN:
         default: web
         description: Choose where to run?
-        type: choice
-        options:
-        - web
-        - mobile
 
 env:
   GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
