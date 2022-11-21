@@ -24,23 +24,36 @@ on:
         - mobile
         
 env:
-  WHERE_TO_RUN: ${{ inputs.WHERE_TO_RUN }}
+  WHERE_TO_RUN: web
   AWS_SECRET_DEV: "secret"
   AWS_SECRET_QA: "now way"
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
       
-      - name: Setup Maven Action
-        uses: s4u/setup-maven-action@v1.6.0
+      - uses: actions/setup-java@v3
         with:
-          java-version: 17
-          maven-version: 3.8.6
-          
-      - name: test
-        run: mvn -v
+          distribution: 'temurin' 
+          java-version: '17'
+
+      - name: fixing permissions for allure
+        run: chmod -R 777 ${{ inputs.GITHUB_WORKSPACE }}/target/allure-results
+
+      - name: Install allure
+        run: |
+          curl -o allure-2.17.3.tgz -OLs https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz
+          sudo tar -zxf allure-2.17.3.tgz -C /opt/
+          sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure
+
+      - name: Run report
+        run: allure generate ${{ inputs.GITHUB_WORKSPACE }}/target/allure-results
+
+      - name: List
+        run: |
+          ls -la
+          pwd
 
