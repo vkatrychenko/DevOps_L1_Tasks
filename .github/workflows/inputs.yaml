@@ -41,7 +41,7 @@ jobs:
           java-version: '17'
 
       - name: fixing permissions for allure
-        run: chmod -R 777 ${{ inputs.GITHUB_WORKSPACE }}/target/allure-results
+        run: chmod -R 777 $GITHUB_WORKSPACE/target/allure-results
 
       - name: Install allure
         run: |
@@ -50,10 +50,10 @@ jobs:
           sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure
 
       - name: Run report
-        run: allure generate ${{ inputs.GITHUB_WORKSPACE }}/target/allure-results
+        run: allure generate $GITHUB_WORKSPACE/target/allure-results
 
       - name: List
         run: |
-          ls -la
+          ls -la $GITHUB_WORKSPACE/target/allure-results
           pwd
 
