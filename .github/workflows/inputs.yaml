@@ -35,9 +35,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Envs
-        run: printenv
+      - name: Run command
+        run: MY_VAR="HELLO FRIEND"
+      
+      - name: Set env
+        run: echo "GITHUB_SHA_SHORT=$MY_VAR" >> $GITHUB_ENV
         
-      - name: Var
-        run: echo $WHERE_TO_RUN
+      - name: Test
+        run: ${GITHUB_SHA_SHORT}
+      
+      - name: Envs
+        run: echo $GITHUB_ENV
+        
 
