@@ -49,6 +49,6 @@ jobs:
       - name: Use the value
         run: |
           echo "${{ env.action_state }}"
-          ehco "${{ env.GITHUB_SHA_SHORT }}"
+          echo "${{ env.GITHUB_SHA_SHORT }}"
         
 
