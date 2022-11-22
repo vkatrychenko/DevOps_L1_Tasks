@@ -39,12 +39,16 @@ jobs:
         run: MY_VAR="HELLO FRIEND"
       
       - name: Set env
-        run: echo "GITHUB_SHA_SHORT=$MY_VAR" >> $GITHUB_ENV
+        run: |
+          echo "GITHUB_SHA_SHORT=${{ env.WHERE_TO_RUN }}" >> $GITHUB_ENV
         
-      - name: Test
-        run: ${GITHUB_SHA_SHORT}
-      
-      - name: Envs
-        run: echo $GITHUB_ENV
+      - name: Set the value
+        run: |
+          echo "action_state=yellow" >> $GITHUB_ENV
+          
+      - name: Use the value
+        run: |
+          echo "${{ env.action_state }}"
+          ehco "${{ env.GITHUB_SHA_SHORT }}"
         
 
